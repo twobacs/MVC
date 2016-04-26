@@ -17,16 +17,22 @@ public function formConnect(){
 	
 	$this->appli->content=$html;
 }
-public function connected($data){
-	if($data){
+public function connected(){
+	if(isset($_SESSION['idUser'])){
 		$html='Vous &ecirc;tes identifi&eacute;.<br />';
-		$html.='<a href="?component=user&action=modifUserById">Modifier mes donn&eacute;es</a>';
-		
+		$html.='<a href="?component=user&action=modifUserById">Modifier mes donn&eacute;es</a><br />';
+		$html.='<a href="?component=user&action=modifPassById">Modifier mon mot de passe</a><br />';
+		if((isset($_SESSION['user']))&&($_SESSION['user']==1)){
+			$html.='<a href="?component=user&action=formAddUser">Ajouter un utilisateur</a><br />';
+			$html.='<a href="?component=user&action=listUsers">Lister les utilisateurs</a><br />';
+			$html.='<a href="?component=user&action=formAttribDroitsdUsers">Modifier les droits</a><br />';
+		}
 	}	
 	else{
 		$html='Login et / ou mot de passe &eacute;rron&eacute;<br /><a href="?component=exemple&action=homepage">Retour</a>';
 	}
 	$this->appli->content=$html;
 }
+
 }
 ?>

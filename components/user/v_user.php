@@ -177,6 +177,7 @@ public function formModifPwd($error=0){
 }
 
 public function formAttribDroitsdUsers($users,$appli,$droits){
+	var_dump($droits);
 	$i=0;
 	$html='<h3 style="margin-left:15px;">Attribution des droits</h3>';
 	while($row=$appli->fetch()){
@@ -188,6 +189,15 @@ public function formAttribDroitsdUsers($users,$appli,$droits){
 		}
 		$html.='</table>';
 		$html.='</form><hr>';
+	}
+	$html.='<a class="btn btn-default" href="?component=exemple&action=login" style="margin-left:15px;">Retour</a><br />';
+	$this->appli->content=$html;
+}
+
+public function listUsers($data){
+	$html='<h3>Liste des utilisateurs inscrits</h3>';
+	foreach($data as $key => $row){
+		$html.=$row['nom'].' '.$row['prenom'].'<br />';
 	}
 	$html.='<a class="btn btn-default" href="?component=exemple&action=login" style="margin-left:15px;">Retour</a><br />';
 	$this->appli->content=$html;

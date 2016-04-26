@@ -14,12 +14,9 @@ public function login(){
 	if(!isset($_SESSION['idUser'])){
 		$data=$this->model->login();
 	}
-	else {
-		$nivUser=$this->model->getNivUser();
-		$data=true;
-	}
-	$this->view->connected($data,$nivUser);
+	$this->view->connected();
 }
+
 
 }
 ?>

@@ -58,5 +58,12 @@ public function formAttribDroitsdUsers(){
 	}
 }
 
+public function listUsers(){
+	if(isset($_SESSION['idUser'])){
+		$data=$this->model->getUsers();
+		$this->view->listUsers($data);
+	}
+}
+
 }
 ?>
