@@ -177,7 +177,7 @@ public function formModifPwd($error=0){
 }
 
 public function formAttribDroitsdUsers($users,$appli,$droits){
-	var_dump($droits);
+	// var_dump($droits);
 	$i=0;
 	$html='<h3 style="margin-left:15px;">Attribution des droits</h3>';
 	while($row=$appli->fetch()){
@@ -194,12 +194,21 @@ public function formAttribDroitsdUsers($users,$appli,$droits){
 	$this->appli->content=$html;
 }
 
+public function selectAppli($applis){
+	$html='<h3>Veuillez s&eacute;lectionner une application</h3>';
+	while($row=$applis->fetch()){
+		$html.='<a href="?component=exemple&action=attribDroitsdUsers&appli='.$row['id_module'].'" style="margin-left:15px;margin-top:10px;"><button type="button" class="btn btn-primary">'.$row['denomination'].'</button></a><br />';
+	}
+	$html.='<a class="btn btn-default" href="?component=exemple&action=login" style="margin-left:15px;margin-top:10px;">Retour</a><br />';
+	$this->appli->content=$html;
+}
+
 public function listUsers($data){
 	$html='<h3>Liste des utilisateurs inscrits</h3>';
 	foreach($data as $key => $row){
 		$html.=$row['nom'].' '.$row['prenom'].'<br />';
 	}
-	$html.='<a class="btn btn-default" href="?component=exemple&action=login" style="margin-left:15px;">Retour</a><br />';
+	$html.='<a class="btn btn-default" href="?component=exemple&action=login" style="margin-left:15px;padding-top:10px;">Retour</a><br />';
 	$this->appli->content=$html;
 }
 }

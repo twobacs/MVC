@@ -25,7 +25,7 @@ public function connected(){
 		if((isset($_SESSION['user']))&&($_SESSION['user']==1)){
 			$html.='<a href="?component=user&action=formAddUser">Ajouter un utilisateur</a><br />';
 			$html.='<a href="?component=user&action=listUsers">Lister les utilisateurs</a><br />';
-			$html.='<a href="?component=user&action=formAttribDroitsdUsers">Modifier les droits</a><br />';
+			$html.='<a href="?component=user&action=attribDroitsdUsers">Modifier les droits</a><br />';
 		}
 	}	
 	else{

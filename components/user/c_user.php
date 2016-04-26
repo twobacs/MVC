@@ -49,12 +49,16 @@ public function modifPassById(){
 	}
 }
 
-public function formAttribDroitsdUsers(){
+public function attribDroitsdUsers(){
 	if(isset($_SESSION['idUser'])){
-		$users=$this->model->getUsers();
-		$appli=$this->model->getApplis();
-		$droits=$this->model->getDroits();
-		$this->view->formAttribDroitsdUsers($users,$appli,$droits);
+		if(!isset($_GET['appli'])){
+			$appli=$this->model->getApplis();
+			$this->view->selectAppli($appli);
+		}
+		else{
+			$droits=$this->model->getDroitsByApp();
+			$this->view->formAttribDroitsByApp($droits);
+		}
 	}
 }
 

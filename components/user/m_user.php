@@ -101,5 +101,9 @@ public function getApplis(){
 	$req=$this->appli->dbPdo->query($sql);
 	return $req;
 }
+
+public function getDroitsByApp(){
+	$sql='SELECT denomination FROM module WHERE id_module=:idMod';
+}
 }
 ?>
