@@ -10,19 +10,21 @@ class MUser extends MBase {
 	}
 
 public function getInfosUserById($id){
-	$sql='SELECT a.matricule, a.nom, a.prenom, a.telephone, a.mail, a.login, a.adresse, b.id_commune FROM users a
-	LEFT JOIN commune b ON b.id_commune=a.id_commune
+	$sql='SELECT matricule, nom, prenom, telephone, mail, login, adresse, id_commune FROM users
 	WHERE id_user=:id';
 	$req=$this->appli->dbPdo->prepare($sql);
 	$req->bindValue(':id',$id,PDO::PARAM_INT);
 	$req->execute();
+	// echo $id;
 	return $req;
+	
 	}
 	
 public function getCommunes(){
 	$sql='SELECT id_commune, nom, CP FROM commune ORDER BY nom';
 	$req=$this->appli->dbPdo->prepare($sql);
 	$req->execute();
+	// echo $sql;
 	return $req;
 }
 	

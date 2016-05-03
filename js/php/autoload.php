@@ -1,5 +1,5 @@
 <?php
 
-$pdo = new PDO('mysql:host=localhost;dbname=****','User','MotDePasse');
+$pdo = new PDO('mysql:host=localhost;dbname=paec','root','');
 
 ?>

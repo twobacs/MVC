@@ -60,7 +60,10 @@ public function formInfosUser($user,$communes){
 					<select style="width:195px;" class="form-control" id="commune" name="commune"><option disabled>Veuillez choisir</option>';
 					while($rowb=$communes->fetch()){
 						$html.='<option value="'.$rowb['id_commune'].'"';
-						$html.=($row['id_commune']==$rowb['id_commune']) ? ' selected' : '';
+						if($row['id_commune']==$rowb['id_commune']){
+							$html.=' selected';
+						}
+						// $html.=($row['id_commune']==$rowb['id_commune']) ? ' selected' : '';
 						$html.='>'.$rowb['nom'].' ('.$rowb['CP'].')</option>';
 					}
 					$html.='
@@ -153,18 +156,18 @@ public function formModifPwd($error=0){
 		<div class="form-group">
 			<div class="input-group">
 				<div class="input-group-addon">Ancien mot de passe</div>
-				<input type="password" class="form-control" name="oldPwd" id="oldPwd" placeHolder="Ancien mot de passe" autofocus required>
+				<input type="password" class="form-control" name="old" id="old" placeHolder="Ancien mot de passe" autofocus onkeyup="verifOldPwd(\''.$_SESSION['idUser'].'\');" required>
 			</div>
 			<div class="input-group">
 				<div class="input-group-addon">Nouveau mot de passe</div>
-				<input type="password" class="form-control" name="newPwd" id="newPwd" placeHolder="Nouveau mot de passe" required>
+				<input type="password" class="form-control" name="newPwd" id="newPwd" placeHolder="Nouveau mot de passe" style="display:none;" required>
 			</div>
 			<div class="input-group">
 				<div class="input-group-addon">Nouveau mot de passe</div>
-				<input type="password" class="form-control" name="newPwd1" id="newPwd1" placeHolder="Nouveau mot de passe (confirmation)" required>
+				<input type="password" class="form-control" name="newPwd1" id="newPwd1" placeHolder="Nouveau mot de passe (confirmation)" onkeyup="verifPwd(\''.$_SESSION['idUser'].'\');" style="display:none;" required>
 			</div>		
 			<div class="input-group">
-				<button type="submit" class="btn btn-default">Enregistrer</button>
+				<button type="submit" class="btn btn-default" style="display:none;" id="bEnregistrer">Enregistrer</button>
 			</div>
 		</div>
 	</form>
