@@ -105,7 +105,32 @@ public function getApplis(){
 }
 
 public function getDroitsByApp(){
-	$sql='SELECT denomination FROM module WHERE id_module=:idMod';
+	$sql='SELECT a.id_user, a.id_type,a.id,
+	b.nom, b.prenom, b.id_user,
+	c.denomination AS denomType,
+	d.denomination AS denomMod
+	FROM user_type a
+	LEFT JOIN users b ON b.id_user=a.id_user
+	LEFT JOIN type c ON c.id_type=a.id_type
+	LEFT JOIN module d ON d.id_module=a.id_module
+	WHERE a.id_module=:idMod';
+	$req=$this->appli->dbPdo->prepare($sql);
+	$req->bindValue('idMod',$_GET['appli'],PDO::PARAM_INT);
+	$req->execute();
+	return $req;
+}
+
+public function getTypeUsers(){
+	$sql='SELECT id_type, denomination FROM type';
+	$req=$this->appli->dbPdo->query($sql);
+	return $req;
+}
+
+public function getDenomAppli(){
+	$sql='SELECT denomination FROM module WHERE id_module = "'.$_GET['appli'].'"';
+	// echo $sql;
+	$req=$this->appli->dbPdo->query($sql);
+	return $req;	
 }
 }
 ?>

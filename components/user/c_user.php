@@ -56,8 +56,11 @@ public function attribDroitsdUsers(){
 			$this->view->selectAppli($appli);
 		}
 		else{
+			$appli=$this->model->getDenomAppli();
 			$droits=$this->model->getDroitsByApp();
-			$this->view->formAttribDroitsByApp($droits);
+			$users=$this->model->getUsers();
+			$types=$this->model->getTypeUsers();
+			$this->view->formAttribDroitsByApp($appli,$droits,$users,$types);
 		}
 	}
 }

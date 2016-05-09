@@ -200,9 +200,9 @@ public function formAttribDroitsdUsers($users,$appli,$droits){
 public function selectAppli($applis){
 	$html='<h3>Veuillez s&eacute;lectionner une application</h3>';
 	while($row=$applis->fetch()){
-		$html.='<a href="?component=exemple&action=attribDroitsdUsers&appli='.$row['id_module'].'" style="margin-left:15px;margin-top:10px;"><button type="button" class="btn btn-primary">'.$row['denomination'].'</button></a><br />';
+		$html.='<a href="?component=user&action=attribDroitsdUsers&appli='.$row['id_module'].'" style="margin-left:15px;margin-top:10px;"><button style="width:150px;" type="button" class="btn btn-primary">'.$row['denomination'].'</button></a><br />';
 	}
-	$html.='<a class="btn btn-default" href="?component=exemple&action=login" style="margin-left:15px;margin-top:10px;">Retour</a><br />';
+	$html.='<a class="btn btn-default" href="?component=exemple&action=login" style="margin-left:15px;margin-top:10px;width:150px;">Retour</a><br />';
 	$this->appli->content=$html;
 }
 
@@ -213,6 +213,19 @@ public function listUsers($data){
 	}
 	$html.='<a class="btn btn-default" href="?component=exemple&action=login" style="margin-left:15px;padding-top:10px;">Retour</a><br />';
 	$this->appli->content=$html;
+}
+
+public function formAttribDroitsByApp($appli,$droits,$users,$types){
+	while($row=$appli->fetch()){
+		$html='<h3>Gestion des droits - Module "'.ucfirst($row['denomination']).'"</h3>';
+	}
+	$html.='<h4>Droits actuels</h4>';
+	$html.='<table>';
+	while($row=$droits->fetch()){
+		$html.='<tr><td style="padding-right: 10px;">'.$row['nom'].' '.$row['prenom'].'</td><td style="padding-right: 10px;">'.$row['denomType'].'</td><td style="padding-right: 10px;"><button type="button" class="btn btn-danger" onclick="removeAcces(\''.$row['id'].'\');">R&eacute;voquer</button></td></tr>';
+	}
+	$html.='</table>';
+	$this->appli->content=$html;	
 }
 }
 ?>

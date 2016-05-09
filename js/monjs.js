@@ -32,3 +32,25 @@ function verifOldPwd( id ){
 		},
 	});
 }
+
+function removeAcces(idRow){
+	var ok=confirm('Etes-vous sur ?');
+	if(ok){
+		$.ajax({
+			type:"GET",
+			url:"js/php/removeAcces.php",
+			data:{
+				idRow:idRow,
+			},
+			success : function (retour){
+				if(retour=='1'){
+					location.reload();
+					alert('Operation successfull :D');
+				}
+				else{
+					alert('Une erreur s\'est produite');
+				}
+			},
+		});
+	}
+}
