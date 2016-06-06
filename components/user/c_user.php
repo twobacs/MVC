@@ -72,5 +72,10 @@ public function listUsers(){
 	}
 }
 
+public function recDroitsdUsers(){
+	$this->model->recDroitsdUsers();
+	$this->attribDroitsdUsers();
+}
+
 }
 ?>

@@ -219,12 +219,30 @@ public function formAttribDroitsByApp($appli,$droits,$users,$types){
 	while($row=$appli->fetch()){
 		$html='<h3>Gestion des droits - Module "'.ucfirst($row['denomination']).'"</h3>';
 	}
+	$exists=array();
+	$i=0;
 	$html.='<h4>Droits actuels</h4>';
 	$html.='<table>';
 	while($row=$droits->fetch()){
-		$html.='<tr><td style="padding-right: 10px;">'.$row['nom'].' '.$row['prenom'].'</td><td style="padding-right: 10px;">'.$row['denomType'].'</td><td style="padding-right: 10px;"><button type="button" class="btn btn-danger" onclick="removeAcces(\''.$row['id'].'\');">R&eacute;voquer</button></td></tr>';
+		$html.='<tr><td style="padding-right: 10px;">'.$row['nom'].' '.$row['prenom'].'</td><td style="padding-right: 10px;">'.$row['denomType'].'</td><td style="padding-right: 10px;"><button type="button" class="btn btn-danger" onclick="removeAcces(\''.$row['id'].'\',\''.$_GET['appli'].'\');">R&eacute;voquer</button></td></tr>';
+		$exists[]=$row['id_user'];
+		$i++;
 	}
 	$html.='</table>';
+	$type=$types->fetchAll();
+	$html.='<h3>Ajouter un acc&egrave;s</h3>';
+	$html.='<table border="1">';
+	foreach ($users as $key => $row){
+		if(!in_array($row['id_user'],$exists)){
+			$html.='<tr><td style="padding:5px;">'.ucfirst($row['nom']).' '.ucfirst($row['prenom']).'</td><td style="padding:5px;">Ajouter en tant que</td>';
+			foreach ($type as $key => $rowZ){
+				$html.='<td style="padding:5px;"><a href="?component=user&action=recDroitsdUsers&appli='.$_GET['appli'].'&user='.$row['id_user'].'&niv='.$rowZ['id_type'].'">'.$rowZ['denomination'].'</a></td>';
+			}
+			$html.='</tr>';
+		}
+	}
+	$html.='</table>';
+	$html.='<a href="?component=user&action=attribDroitsdUsers" role="button" style="width:370px;margin-top:15px;" class="btn btn-primary">Retour</a><br />';
 	$this->appli->content=$html;	
 }
 }

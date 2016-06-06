@@ -33,7 +33,7 @@ function verifOldPwd( id ){
 	});
 }
 
-function removeAcces(idRow){
+function removeAcces(idRow,appli){
 	var ok=confirm('Etes-vous sur ?');
 	if(ok){
 		$.ajax({
@@ -44,7 +44,7 @@ function removeAcces(idRow){
 			},
 			success : function (retour){
 				if(retour=='1'){
-					location.reload();
+					window.location.href="?component=user&action=attribDroitsdUsers&appli="+appli+"";
 					alert('Operation successfull :D');
 				}
 				else{

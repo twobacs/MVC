@@ -132,5 +132,14 @@ public function getDenomAppli(){
 	$req=$this->appli->dbPdo->query($sql);
 	return $req;	
 }
+
+public function recDroitsdUsers(){
+	$sql='INSERT INTO user_type (id_user, id_type, id_module) VALUES (:user,:type,:module)';
+	$req=$this->appli->dbPdo->prepare($sql);
+	$req->bindValue('user',$_GET['user'],PDO::PARAM_INT);
+	$req->bindValue('type',$_GET['niv'],PDO::PARAM_INT);
+	$req->bindValue('module',$_GET['appli'],PDO::PARAM_INT);
+	$req->execute();
+}
 }
 ?>
